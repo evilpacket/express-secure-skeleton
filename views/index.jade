@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+    form(method="post",action="/login")
+      input(type="hidden", name="_csrf", value=csrftoken)
+      button(type="submit") Login
