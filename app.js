@@ -41,8 +41,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', routes.isAuthenticated, routes.index);
 app.post('/login', routes.login);
+app.post('/getAuth', routes.getAuth);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
