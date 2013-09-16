@@ -29,7 +29,7 @@ app.configure(function(){
   app.use(express.csrf());
 
   app.use(function (req, res, next) {
-    res.locals.csrftoken = req.session._csrf;
+    res.locals.csrftoken = req.csrfToken();
     next();
   });
 
