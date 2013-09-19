@@ -6,38 +6,38 @@ var express = require('express'),
 
 var app = express();
 
-app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  //app.use(helmet.xframe());
-  //app.use(helmet.iexss());
-  //app.use(helmet.contentTypeOptions());
-  //app.use(helmet.cacheControl());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser());
-  app.use(express.session({
-    secret: "notagoodsecret",
-    //cookie: {httpOnly: true, secure: true},
-    cookie: {httpOnly: true}
-  }));
-  app.use(express.csrf());
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+//app.use(helmet.xframe());
+//app.use(helmet.iexss());
+//app.use(helmet.contentTypeOptions());
+//app.use(helmet.cacheControl());
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(express.session({
+  secret: "notagoodsecret",
+  //cookie: {httpOnly: true, secure: true},
+  cookie: {httpOnly: true}
+}));
+app.use(express.csrf());
 
-  app.use(function (req, res, next) {
-    res.locals.csrftoken = req.csrfToken();
-    next();
-  });
-
-  app.use(express.static(__dirname + '/public'));
-  app.use(app.router);
+app.use(function (req, res, next) {
+  res.locals.csrftoken = req.csrfToken();
+  next();
 });
 
-app.configure('development', function(){
+app.use(express.static(__dirname + '/public'));
+app.use(app.router);
+
+// development only
+if ('development' == app.get('env')){
   app.use(express.errorHandler());
-});
+}
 
 app.get('/', routes.index);
 app.post('/login', routes.login);
