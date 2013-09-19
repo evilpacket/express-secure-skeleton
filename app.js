@@ -20,8 +20,9 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('optional secret string'));
 app.use(express.session({
-  secret: "notagoodsecret",
-  //cookie: {httpOnly: true, secure: true},
+  secret: 'keyboard cat',
+  key: 'sid',
+  //cookie: {httpOnly: true, secure: true}
   cookie: {httpOnly: true}
 }));
 app.use(express.csrf());
