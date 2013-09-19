@@ -2,7 +2,6 @@ var express = require('express'),
     routes = require('./routes'),
     user = require('./routes/user'),
     http = require('http'),
-    path = require('path'),
     helmet = require('helmet');
 
 var app = express();
@@ -32,7 +31,7 @@ app.configure(function(){
     next();
   });
 
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(__dirname + '/public'));
   app.use(app.router);
 });
 
