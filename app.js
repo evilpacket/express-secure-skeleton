@@ -3,7 +3,6 @@ var express = require('express'),
     user = require('./routes/user'),
     http = require('http'),
     path = require('path'),
-    MemoryStore = express.session.MemoryStore;
     helmet = require('helmet');
 
 var app = express();
@@ -24,7 +23,7 @@ app.configure(function(){
   app.use(express.session({
     secret: "notagoodsecret",
     //cookie: {httpOnly: true, secure: true},
-    cookie: {httpOnly: true},
+    cookie: {httpOnly: true}
   }));
   app.use(express.csrf());
 
