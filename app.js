@@ -1,8 +1,8 @@
 var express = require('express'),
-    routes = require('./routes'),
-    user = require('./routes/user'),
-    http = require('http'),
-    helmet = require('helmet');
+  routes = require('./routes'),
+  user = require('./routes/user'),
+  http = require('http'),
+  helmet = require('helmet');
 
 var app = express();
 
@@ -26,12 +26,10 @@ app.use(express.session({
   cookie: {httpOnly: true}
 }));
 app.use(express.csrf());
-
 app.use(function (req, res, next) {
   res.locals.csrftoken = req.csrfToken();
   next();
 });
-
 app.use(express.static(__dirname + '/public', {maxAge: 60000}));  // 1min
 app.use(express.compress());
 app.use(app.router);
