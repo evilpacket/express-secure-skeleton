@@ -33,6 +33,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static(__dirname + '/public', {maxAge: 60000}));  // 1min
+app.use(express.compress());
 app.use(app.router);
 
 // development only
