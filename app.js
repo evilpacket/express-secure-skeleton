@@ -16,7 +16,8 @@ app.use(express.logger('dev'));
 //app.use(helmet.iexss());
 //app.use(helmet.contentTypeOptions());
 //app.use(helmet.cacheControl());
-app.use(express.bodyParser());
+app.use(express.urlencoded());
+app.use(express.json());
 app.use(express.methodOverride());
 app.use(express.cookieParser('optional secret string'));
 app.use(express.session({
