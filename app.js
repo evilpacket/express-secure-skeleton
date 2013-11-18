@@ -10,13 +10,15 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.disable('x-powered-by');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 //app.use(helmet.xframe());
 //app.use(helmet.iexss());
 //app.use(helmet.contentTypeOptions());
 //app.use(helmet.cacheControl());
-app.use(express.bodyParser());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('optional secret string'));
 app.use(express.session({
